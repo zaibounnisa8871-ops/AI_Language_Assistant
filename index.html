@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TranslateAI | Language Assistant</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">✦</div>
+            <span>TranslateAI</span>
+        </div>
+
+        <button class="new-chat" id="newChat">
+            <span>＋</span>
+            New Chat
+        </button>
+
+        <div class="sidebar-section">
+            <p class="section-label">YOUR CONVERSATIONS</p>
+            <div id="chatHistory"></div>
+        </div>
+
+        <div class="sidebar-bottom">
+            <div class="developer-credit">
+                <span class="credit-dot"></span>
+                Crafted by Zaib un Nisa
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN AREA -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <button class="menu-button" id="menuButton">
+                ☰
+            </button>
+
+            <div class="topbar-center">
+                AI Language Assistant
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                Ready
+            </div>
+
+        </header>
+
+
+        <!-- CHAT AREA -->
+
+        <section class="chat-area" id="chatArea">
+
+            <div class="welcome" id="welcome">
+
+                <div class="welcome-icon">✦</div>
+
+                <h1 id="greeting">Good morning!</h1>
+
+                <p class="welcome-subtitle">
+                    What would you like to translate today?
+                </p>
+
+                <p class="welcome-description">
+                    Break language barriers effortlessly.
+                    Type, speak, or upload an image.
+                </p>
+
+                <div class="suggestions">
+
+                    <button class="suggestion"
+                            data-text="Hello, how are you?">
+                        Translate a greeting
+                    </button>
+
+                    <button class="suggestion"
+                            data-text="I would like to learn a new language.">
+                        Practice a language
+                    </button>
+
+                    <button class="suggestion"
+                            data-text="Thank you for your help.">
+                        Try a translation
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="messages" id="messages"></div>
+
+        </section>
+
+
+        <!-- INPUT AREA -->
+
+        <div class="composer-wrapper">
+
+            <div class="composer">
+
+                <div class="feature-row">
+
+                    <button class="feature active" id="translateMode">
+                        ✦ Translate
+                    </button>
+
+                    <button class="feature" id="voiceMode">
+                        🎤 Voice
+                    </button>
+
+                    <button class="feature" id="scanMode">
+                        ▣ Scan text
+                    </button>
+
+                    <button class="feature" id="vocabularyMode">
+                        📖 Vocabulary
+                    </button>
+
+                </div>
+
+
+                <textarea
+                    id="messageInput"
+                    placeholder="Type your text in the language you select below..."
+                    rows="3"
+                ></textarea>
+
+
+                <div class="composer-bottom">
+
+                    <div class="input-tools">
+
+                        <button class="icon-button"
+                                id="uploadButton"
+                                title="Upload image">
+                            📎
+                        </button>
+
+                        <button class="icon-button"
+                                id="micButton"
+                                title="Voice input">
+                            🎙
+                        </button>
+
+                        <input type="file"
+                               id="imageInput"
+                               accept="image/*"
+                               hidden>
+
+                        <!-- SOURCE LANGUAGE SELECTOR -->
+
+                        <select id="sourceLanguage"
+                                aria-label="Select the language of your text"
+                                title="Language you are writing in">
+
+                            <option value="">From: Select language</option>
+                            <option value="en">From: English</option>
+                            <option value="ur">From: Urdu</option>
+                            <option value="hi">From: Hindi</option>
+                            <option value="ar">From: Arabic</option>
+                            <option value="fr">From: French</option>
+                            <option value="de">From: German</option>
+                            <option value="es">From: Spanish</option>
+                            <option value="it">From: Italian</option>
+                            <option value="tr">From: Turkish</option>
+                            <option value="zh-CN">From: Chinese</option>
+                            <option value="ja">From: Japanese</option>
+                            <option value="ko">From: Korean</option>
+                            <option value="pt">From: Portuguese</option>
+                            <option value="ru">From: Russian</option>
+                            <option value="nl">From: Dutch</option>
+                            <option value="bn">From: Bengali</option>
+                            <option value="fa">From: Persian</option>
+                            <option value="pa">From: Punjabi</option>
+                            <option value="id">From: Indonesian</option>
+                            <option value="ms">From: Malay</option>
+                            <option value="sw">From: Swahili</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="send-tools">
+
+                        <!-- TARGET LANGUAGE SELECTOR -->
+
+                        <select id="targetLanguage"
+                                aria-label="Select the language to translate into"
+                                title="Language you want to translate into">
+
+                            <option value="ur">To: Urdu</option>
+                            <option value="en" selected>To: English</option>
+                            <option value="hi">To: Hindi</option>
+                            <option value="ar">To: Arabic</option>
+                            <option value="fr">To: French</option>
+                            <option value="de">To: German</option>
+                            <option value="es">To: Spanish</option>
+                            <option value="it">To: Italian</option>
+                            <option value="tr">To: Turkish</option>
+                            <option value="zh-CN">To: Chinese</option>
+                            <option value="ja">To: Japanese</option>
+                            <option value="ko">To: Korean</option>
+                            <option value="pt">To: Portuguese</option>
+                            <option value="ru">To: Russian</option>
+                            <option value="nl">To: Dutch</option>
+                            <option value="bn">To: Bengali</option>
+                            <option value="fa">To: Persian</option>
+                            <option value="pa">To: Punjabi</option>
+                            <option value="id">To: Indonesian</option>
+                            <option value="ms">To: Malay</option>
+                            <option value="sw">To: Swahili</option>
+
+                        </select>
+
+                        <button class="send-button"
+                                id="sendButton"
+                                title="Translate text">
+                            ➤
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <p class="footer-note">
+                AI-powered language assistance · Review important translations
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

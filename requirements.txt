@@ -1,0 +1,5 @@
+Flask
+requests
+langdetect
+python-dotenv
+gunicorn
